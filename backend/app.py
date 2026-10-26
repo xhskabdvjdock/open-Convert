@@ -25,6 +25,11 @@ except ImportError:
     yt_dlp = None
 
 try:
+    import ffmpeg as bundled_ffmpeg
+except ImportError:
+    bundled_ffmpeg = None
+
+try:
     from PIL import Image, ImageOps
 except ImportError:
     Image = ImageOps = None
@@ -41,6 +46,11 @@ def find_tool(name: str) -> str | None:
     found = shutil.which(name)
     if found:
         return found
+    if bundled_ffmpeg is not None and name in {"ffmpeg", "ffprobe"}:
+        binary_attribute = {"ffmpeg": "FFMPEG_PATH", "ffprobe": "FFPROBE_PATH"}[name]
+        bundled_path = getattr(bundled_ffmpeg, binary_attribute, None)
+        if bundled_path and Path(bundled_path).is_file():
+            return str(bundled_path)
     if os.name == "nt":
         packages = Path(os.environ.get("LOCALAPPDATA", "")) / "Microsoft" / "WinGet" / "Packages"
         for path in packages.glob(f"Gyan.FFmpeg.Shared*/*/bin/{name}.exe"):
