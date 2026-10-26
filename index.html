@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="openConvert لتحويل الملفات وتنزيل الوسائط. حوّل الصور والصوت والفيديو والمستندات.">
+  <title>openConvert — تحويل الملفات وتنزيل الوسائط</title>
+  <link rel="stylesheet" href="/styles.css?v=5">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="openConvert الرئيسية"><span class="brand-mark">o</span><span>open<b>Convert</b></span></a>
+    <nav aria-label="التنقل الرئيسي"><a href="#convert">تحويل الملفات</a><a href="#media">تنزيل الوسائط</a><a href="#about">حول الخدمة</a></nav>
+    <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="التبديل إلى الوضع الأبيض"><span class="theme-swatch" aria-hidden="true"></span><span id="themeToggleText">الوضع الأبيض</span></button>
+    <a class="nav-cta" href="#convert">ابدأ الآن <span>←</span></a>
+  </header>
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy"><span class="eyebrow">تحويل ملفات وتنزيل وسائط</span><h1>حوّل ملفاتك.<br>نزّل ما تحتاجه.</h1><p>صور، صوت، فيديو ومستندات. اختر الملف والصيغة، أو افحص رابط الوسائط قبل تنزيله.</p><a class="primary-button" href="#convert">ابدأ التحويل <span>↓</span></a><div class="hero-note"><span class="lock">✓</span> تُحذف ملفات التحويل بعد إرسال النتيجة</div></div>
+    </section>
+    <section class="tools" id="convert">
+      <div class="section-heading"><div><span class="eyebrow">محركات حسب نوع الملف</span><h2>تحويل الملفات</h2></div><span class="step-count">01 <i>/</i> 02</span></div>
+      <div class="converter-card">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="اختر ملفًا أو اسحبه هنا">
+          <input id="fileInput" type="file" hidden>
+          <div class="upload-icon"><span>↑</span></div><h3 id="dropTitle">اسحب الملف إلى هنا</h3><p id="dropSubtitle">أو <button class="text-button" id="browseButton" type="button">اختر ملفًا</button> من جهازك</p><span class="formats" id="supportedHint">نحمّل صيغ التحويل المتاحة...</span>
+        </div>
+          <div class="convert-controls"><div class="selected-file" id="selectedFile"><span class="file-icon">▧</span><div><b id="fileName">لم يتم اختيار ملف</b><small id="fileMeta">اختر نوع الملف للبدء</small></div><button id="removeFile" class="icon-button" type="button" aria-label="إزالة الملف" hidden>×</button></div><div class="format-select"><label for="categorySelect">نوع الملف</label><select id="categorySelect" aria-label="نوع الملف"></select></div><div class="format-select"><label for="outputFormat">صيغة الإخراج</label><select id="outputFormat" disabled></select></div><button id="convertButton" class="convert-button" type="button" disabled>تحويل الملف <span>↗</span></button><p class="privacy-note" id="capabilityNote"><span>◈</span> تُرفع الملفات للخادم للمعالجة ثم تُحذف بعد التنزيل</p></div>
+        <div id="result" class="result" aria-live="polite" hidden></div>
+      </div>
+    </section>
+    <section class="media-section" id="media">
+      <div class="media-icon">▷</div>
+      <div class="media-copy media-full">
+        <span class="eyebrow">فحص وتنزيل مباشر</span>
+        <h2>تنزيل الوسائط من الرابط</h2>
+        <p>الصق رابطًا عامًا من منصة يدعمها yt-dlp. الدعم يختلف حسب الموقع وقد يتغير، وسيُفحص الرابط قبل إظهار خياراته.</p>
+        <div class="url-row">
+          <input id="mediaUrl" type="url" inputmode="url" placeholder="https://example.com/video" aria-label="رابط الوسائط">
+          <button id="inspectButton" type="button" class="convert-button">فحص الرابط <span>⌕</span></button>
+        </div>
+        <div id="mediaInfo" class="media-info" aria-live="polite" hidden></div>
+        <div class="media-controls" id="mediaControls" hidden>
+          <label>النوع<select id="mediaMode"><option value="video">فيديو</option><option value="audio">صوت</option></select></label>
+          <label id="qualityWrap">الجودة<select id="mediaQuality"><option value="best">أفضل جودة متاحة</option></select></label>
+          <label>الصيغة<select id="mediaFormat"><option value="mp4">MP4</option><option value="mkv">MKV</option><option value="webm">WEBM</option></select></label>
+          <button id="downloadButton" type="button" class="convert-button">تنزيل الملف <span>↓</span></button>
+        </div>
+        <p id="mediaMessage" class="media-message" aria-live="polite"></p>
+        <details id="supportedPlatforms" class="platforms-list">
+          <summary>عرض المنصات التي يتعرف عليها yt-dlp</summary>
+          <p class="platforms-note">هذه قائمة المستخرجات المضمنة في نسخة yt-dlp المثبتة. قد تتغير المنصات أو تتعطل، وبعض الروابط تحتاج تسجيل دخول أو لا تسمح بالتنزيل.</p>
+          <label class="platform-search" for="platformSearch">ابحث في القائمة
+            <input id="platformSearch" type="search" placeholder="اكتب اسم منصة..." autocomplete="off">
+          </label>
+          <p id="platformCount" class="platform-count" aria-live="polite">تُحمّل القائمة عند فتحها...</p>
+          <ul id="platformItems" class="platform-items"></ul>
+          <a class="platform-source" href="https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md" target="_blank" rel="noopener noreferrer">المصدر الرسمي لقائمة المواقع المدعومة ↗</a>
+        </details>
+      </div>
+    </section>
+    <section class="how" id="about"><span class="eyebrow">بلا تعقيد</span><h2>حمّل، حوّل، ثم نزّل النتيجة</h2><div class="steps"><article><span>01</span><h3>اختر ملفك أو الرابط</h3><p>الصيغ المتاحة تُحمّل من محركات الخادم.</p></article><article><span>02</span><h3>حدد الإخراج</h3><p>اختر صيغة ضمن الأنواع المدعومة فعليًا.</p></article><article><span>03</span><h3>نزّل النتيجة</h3><p>لا نجاح قبل اكتمال التحويل أو التنزيل.</p></article></div></section>
+  </main>
+  <footer><a class="brand" href="#home"><span class="brand-mark">o</span><span>open<b>Convert</b></span></a><span>تحويل ملفات وتنزيل وسائط.</span><span>© 2026 openConvert</span></footer>
+  <script src="/app.js?v=5" defer></script>
+</body>
+</html>
