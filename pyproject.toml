@@ -1,2 +1,14 @@
+[project]
+name = "openconvert"
+version = "0.2.0"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+  "fastapi==0.162.0",
+  "uvicorn==0.54.0",
+  "python-multipart==0.0.32",
+  "Pillow==13.0.0",
+  "yt-dlp[default]==2026.10.21",
+]
+
 [tool.vercel]
 entrypoint = "backend.app:app"
